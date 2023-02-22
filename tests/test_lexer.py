@@ -8,7 +8,10 @@ from compiler.lexer import Lexer
 
 
 @pytest.mark.parametrize(
-    "string,expected", [(["// Bonjour _%^%&@*134qfsv"], "COMMENT")]
+    "string,expected", [
+        (["// Bonjour _%^%&@*134qfsv"], "COMMENT"),
+        (["int"], "TYPE_INT")
+    ]
 )
 def test_lex_one_lexem(string, expected):
     lexer = Lexer()
@@ -17,7 +20,7 @@ def test_lex_one_lexem(string, expected):
     assert lexems[0].tag == expected
 
 
-@pytest.mark.parametrize("test_program", ["example1.c"])
+@pytest.mark.parametrize("test_program", ["example1.c", "example3.c"])
 def test_lex_complete(test_program):
     lexer = Lexer()
     lexer.lex_file("examples/" + test_program)
