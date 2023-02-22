@@ -6,4 +6,4 @@ from compiler.lexer import Lexer
 
 if __name__ == "__main__":
     lexer = Lexer()
-    print(lexer.lex_file(sys.argv[1]))
+    print(lexer.lex_file("examples\example1.c"))
