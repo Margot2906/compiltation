@@ -81,9 +81,28 @@ class Parser:
         self.expect("R_CURL_BRACKET")
 
     def parse_assignment(self):
-        ...
+        """
+        Parses an assignment which is a variable declaration followed by an expression.
+        """
+        self.parse_declaration()
+        self.expect("ASSIGNMENT")
+        self.parse_expression()
+
 
     def parse_declaration(self):
-        ...
+        """
+        Parses a declaration which is a type followed by an identifier.
+        """
+        self.expect("TYPE_INT")
+        self.expect("IDENTIFIER")
 
-    ...
+    def parse_expression(self):
+        """
+        Parses an expression which is a succession of terms.
+        """
+        self.parse_term()
+        while self.show_next().tag in ["PLUS", "MINUS"]:
+            self.accept()
+            self.parse_term()
+
+

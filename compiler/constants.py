@@ -8,6 +8,7 @@ LEXEM_REGEXES = [
     (r"\{", "L_CURL_BRACKET"),
     (r"\}", "R_CURL_BRACKET"),
     (r";", "SEMICOLON"),
+    (r"=", "EQUALS"),
     # Keywords
     (r"int", "TYPE_INT"),
     (r"main", "KW_MAIN"),
@@ -20,5 +21,8 @@ LEXEM_REGEXES = [
     (r"\-", "OP_MINUS"),
     (r"\*", "OP_MULT"),
     (r"\/", "OP_DIV"),
-    (r"\%", "OP_MOD")
+    (r"\%", "OP_MOD"),
+    #identifiers
+    (r"[a-zA-Z_][a-zA-Z0-9_]*", "IDENTIFIER")
+
 ]
