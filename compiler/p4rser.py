@@ -142,6 +142,13 @@ class Parser:
         self.expect("R_CURL_BRACKET")
         return classes.while_statement()
 
+    def parse_block(self):
+        """
+        Parses a block which is a succession of statements.
+        """
+        while self.show_next().tag in ["TYPE_INT", "IDENTIFIER", "KW_IF", "KW_WHILE"]:
+            self.parse_statement()
+
 
 
 
