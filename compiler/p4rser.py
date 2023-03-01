@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 import logging
+import classes
+
 
 logger = logging.getLogger(__name__)
 
@@ -104,5 +106,42 @@ class Parser:
         while self.show_next().tag in ["PLUS", "MINUS"]:
             self.accept()
             self.parse_term()
+
+    def parse_term(self):
+        """
+        Parses a term which is a succession of factors.
+        """
+        self.parse_factor()
+        while self.show_next().tag in ["MULT", "DIV"]:
+            self.accept()
+            self.parse_factor()
+
+    def parse_if_statement(self):
+        """
+        Parses an if statement which is a condition followed by a block.
+        """
+        self.expect("KW_IF")
+        self.expect("L_PAREN")
+        self.parse_expression()
+        self.expect("R_PAREN")
+        self.expect("L_CURL_BRACKET")
+        self.parse_block()
+        self.expect("R_CURL_BRACKET")
+        return classes.if_statement()
+
+    def parse_while_statement(self):
+        """
+        Parses a while statement which is a condition followed by a block.
+        """
+        self.expect("KW_WHILE")
+        self.expect("L_PAREN")
+        self.parse_expression()
+        self.expect("R_PAREN")
+        self.expect("L_CURL_BRACKET")
+        self.parse_block()
+        self.expect("R_CURL_BRACKET")
+        return classes.while_statement()
+
+
 
 
